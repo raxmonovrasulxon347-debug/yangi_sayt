@@ -7,31 +7,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 AI Multi-Tool Hub</h1>
-        <p>Qaysi loyihani ishga tushiramiz?</p>
 
-        <div class="project-selector">
-            <button onclick="switchProject('interior')">Xona Dizayni</button>
-            <button onclick="switchProject('car')">Avto Tyuning</button>
-            <button onclick="switchProject('todo')">Aqlli Todo</button>
+    <div class="container">
+        <div class="user-profile" id="userArea">
+            <button onclick="googleLogin()" id="loginBtn">Google orqali kirish</button>
         </div>
 
-        <hr>
+        <h1>🚀 AI Design Studio</h1>
+        <div class="price-tag">Har bir dizayn: 5.00$</div>
+        
+        <p>Premium AI xizmatidan foydalaning</p>
+
+        <div class="project-selector">
+            <button onclick="switchProject('interior')">🏠 Xona Dizayni</button>
+            <button onclick="switchProject('car')">🏎️ Avto Tyuning</button>
+        </div>
+
+        <hr style="border: 0.5px solid #eee; margin: 20px 0;">
 
         <div id="project-content">
-            <div id="statusText">Loyihani tanlang...</div>
-            
+            <div id="statusText" style="margin-bottom: 10px; font-weight: bold;">Loyihani tanlang...</div>
             <div id="ui-area"></div>
-            
             <div id="result-area">
-                <img id="mainImage" src="" alt="AI Design" style="display:none; width: 100%; max-width: 600px; border-radius: 15px; margin-top: 20px;">
-                
+                <img id="mainImage" src="" style="display:none; width: 100%; border-radius: 15px; border: 1px solid #ddd;">
+                <button id="payBtn" style="display:none; background: #22c55e; color: white; margin-top: 15px; padding: 15px 30px; border: none; border-radius: 12px; font-size: 1.1rem; cursor: pointer;">
+                    💳 $5 To'lash va Yuklab olish
+                </button>
                 <ul id="todoList" style="display:none; list-style: none; padding: 0;"></ul>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
