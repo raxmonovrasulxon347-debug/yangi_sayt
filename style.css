@@ -44,6 +44,26 @@ input, select {
     background: #2a2a3d;
     color: white;
     margin: 10px;
+    .gen-btn {
+    background: #00d2ff;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
 }
+.gen-btn:hover { background: #008fb3; }
+#todoList li {
+    background: rgba(255,255,255,0.1);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+}
+
 
 #ui-area { margin: 20px 0; }
