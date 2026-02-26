@@ -1,76 +1,58 @@
-function switchProject(type) {
-    const uiArea = document.getElementById('ui-area');
-    const statusText = document.getElementById('statusText');
-    const mainImage = document.getElementById('mainImage');
-    const todoList = document.getElementById('todoList');
+async function generate() {
+    // Elementlarni aniqlab olamiz
+    const gender = document.getElementById("gender").value;
+    const type = document.getElementById("type").value;
+    const color = document.getElementById("color").value;
+    const statusText = document.getElementById("statusText");
+    const shoeImage = document.getElementById("shoeImage");
+    const downloadBtn = document.getElementById("downloadBtn");
 
-    // Tozalash
-    uiArea.innerHTML = '';
-    mainImage.style.display = 'none';
-    todoList.style.display = 'none';
+    // Yuklanish jarayonini boshlaymiz
+    statusText.innerText = "🤖 AI siz uchun maxsus dizayn chizmoqda...";
+    statusText.style.color = "#00d2ff";
+    shoeImage.style.opacity = "0.5"; // Rasm yuklanguncha xiralashtirib turamiz
 
-    if (type === 'interior') {
-        statusText.innerText = "🏠 AI Interior Designer";
-        uiArea.innerHTML = `
-            <select id="roomType">
-                <option value="living room">Mehmonxona</option>
-                <option value="bedroom">Yotoqxona</option>
-            </select>
-            <select id="style">
-                <option value="modern">Zamonaviy</option>
-                <option value="minimalist">Minimalist</option>
-            </select>
-            <button onclick="generateAI('interior')">Dizayn yaratish</button>
-        `;
-    } else if (type === 'car') {
-        statusText.innerText = "🏎️ AI Car Customizer";
-        uiArea.innerHTML = `
-            <input type="text" id="carModel" placeholder="Mashina modeli (masal: BMW M4)">
-            <input type="color" id="carColor" value="#ff0000">
-            <button onclick="generateAI('car')">Tyuning qilish</button>
-        `;
-    } else if (type === 'todo') {
-        statusText.innerText = "✅ Smart Todo List";
-        uiArea.innerHTML = `
-            <input type="text" id="todoInput" placeholder="Yangi vazifa...">
-            <button onclick="addTodo()">Qo'shish</button>
-        `;
-        todoList.style.display = 'block';
-    }
-}
-
-async function generateAI(mode) {
-    const mainImage = document.getElementById('mainImage');
-    const statusText = document.getElementById('statusText');
-    let prompt = "";
-
-    if (mode === 'interior') {
-        const room = document.getElementById('roomType').value;
-        const style = document.getElementById('style').value;
-        prompt = `Professional interior design, ${style} ${room}, 8k, realistic lighting`;
-    } else {
-        const model = document.getElementById('carModel').value;
-        const color = document.getElementById('carColor').value;
-        prompt = `Hyper-realistic car photo, ${model}, customized with ${color} color, cinematic view, 8k`;
-    }
-
-    statusText.innerText = "🤖 AI ishlamoqda...";
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?nologo=true`;
+    // AI uchun matnli vazifa (Prompt) tayyorlaymiz
+    const prompt = `Hyper-realistic professional shoe photography, ${gender} ${type} sneakers, primary color ${color}, trend-setting design, cinematic lighting, high resolution, white studio background, 8k`;
     
-    mainImage.src = imageUrl;
-    mainImage.onload = () => {
-        mainImage.style.display = "block";
-        statusText.innerText = "✅ Tayyor!";
+    // Pollinations AI rasm generatori manzili (Bepul va API kalit shart emas)
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
+
+    // Rasmni yuklash
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+        shoeImage.src = imageUrl;
+        shoeImage.style.display = "block";
+        shoeImage.style.opacity = "1";
+        statusText.innerText = "✅ Tabriklaymiz! Yangi dizayn tayyor.";
+        statusText.style.color = "#4CAF50";
+        
+        // Yuklab olish tugmasini ko'rsatish
+        if (downloadBtn) {
+            downloadBtn.style.display = "inline-block";
+        }
+
+        // Agar 3D model bo'lsa, uning rangini ham moslashtiramiz
+        if (typeof update3DColor === "function") {
+            update3DColor(color);
+        }
+    };
+
+    img.onerror = () => {
+        statusText.innerText = "❌ Kechirasiz, rasm yuklashda xatolik yuz berdi. Qayta urinib ko'ring.";
+        statusText.style.color = "#ff4b2b";
     };
 }
 
-function addTodo() {
-    const input = document.getElementById('todoInput');
-    if (input.value === "") return;
-    const li = document.createElement('li');
-    li.innerText = "📌 " + input.value;
-    li.style.textAlign = "left";
-    li.style.padding = "5px";
-    document.getElementById('todoList').appendChild(li);
-    input.value = "";
+// Rasm yuklab olish funksiyasi
+function downloadImage() {
+    const shoeImage = document.getElementById("shoeImage");
+    const link = document.createElement("a");
+    link.href = shoeImage.src;
+    link.download = "raxmonov-shoe-design.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
