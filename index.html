@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Multi-Tool Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 AI Multi-Tool Hub</h1>
+        <p>Qaysi loyihani ishga tushiramiz?</p>
+
+        <div class="project-selector">
+            <button onclick="switchProject('interior')">Xona Dizayni</button>
+            <button onclick="switchProject('car')">Avto Tyuning</button>
+            <button onclick="switchProject('todo')">Aqlli Todo</button>
+        </div>
+
+        <hr>
+
+        <div id="project-content">
+            <div id="statusText">Loyihani tanlang...</div>
+            <div id="ui-area"></div>
+            <div id="result-area">
+                <img id="mainImage" src="" style="display:none; width: 100%; border-radius: 15px;">
+                <ul id="todoList" style="display:none;"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

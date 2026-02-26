@@ -1,0 +1,49 @@
+body {
+    background: radial-gradient(circle, #1a1a2e 0%, #0f0f1a 100%);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.project-selector button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #3a7bd5;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.project-selector button:hover {
+    background: #3a7bd5;
+    box-shadow: 0 0 15px #3a7bd5;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #2a2a3d;
+    color: white;
+    margin: 10px;
+}
+
+#ui-area { margin: 20px 0; }
