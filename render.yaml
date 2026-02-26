@@ -1,0 +1,6 @@
+services:
+  - type: static
+    name: raxmonov-shoe-designer
+    env: static
+    buildCommand: ""
+    publishDir: "."
