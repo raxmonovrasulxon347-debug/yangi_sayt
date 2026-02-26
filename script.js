@@ -78,4 +78,25 @@ function addTodo() {
     li.innerHTML = `📌 ${input.value} <button onclick="this.parentElement.remove()" style="float:right; background:none; border:none; cursor:pointer;">❌</button>`;
     document.getElementById('todoList').appendChild(li);
     input.value = "";
+    function googleLogin() {
+    // Kelajakda Firebase Auth shu yerga ulanadi
+    const userArea = document.getElementById('userArea');
+    userArea.innerHTML = `
+        <span>Salom, Rasulxon!</span>
+        <img src="https://via.placeholder.com/40" class="avatar">
+    `;
+    alert("Google profil muvaffaqiyatli bog'landi!");
 }
+
+// Dizayn yaratilgandan keyin to'lov tugmasini ko'rsatish
+function showPaymentOption() {
+    const payBtn = document.getElementById('payBtn');
+    payBtn.style.display = "inline-block";
+    payBtn.onclick = function() {
+        alert("To'lov sahifasiga o'tilmoqda... (Stripe/PayPal)");
+        // To'lov muvaffaqiyatli bo'lsa, yuklab olishga ruxsat beramiz
+    };
+}
+    
+}
+
