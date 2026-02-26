@@ -62,8 +62,16 @@ input, select {
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    #mainImage {
+    border: 3px solid #00d2ff;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+    margin-top: 20px;
+    background-color: #2a2a3d; /* Rasm yuklanguncha fon ko'rinib turadi */
+    min-height: 300px;
+}
 }
 }
 
 
 #ui-area { margin: 20px 0; }
+
