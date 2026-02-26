@@ -1,46 +1,40 @@
-async function generate() {
+function generate() {
+    // 1. Elementlarni olish
     const gender = document.getElementById("gender").value;
     const type = document.getElementById("type").value;
     const color = document.getElementById("color").value;
     const statusText = document.getElementById("statusText");
     const shoeImage = document.getElementById("shoeImage");
 
-    statusText.innerText = "🤖 AI rasm chizmoqda, iltimos kuting...";
-    shoeImage.style.display = "none"; 
+    // 2. Yuklanish holati
+    statusText.innerText = "🎨 AI yangi dizayn tayyorlamoqda...";
+    shoeImage.style.display = "none"; // Yangisi yuklanguncha eskisini yashiramiz
 
-    // Promptni shakllantirish
-    const prompt = `professional shoe design, ${gender} ${type}, ${color} color, high quality, white background`;
-    
-    // Tasodifiy son qo'shamiz (Keshni tozalash uchun)
-    const seed = Math.floor(Math.random() * 1000000);
+    // 3. Prompt va URL yaratish
+    // Seed har safar har xil rasm chiqishini ta'minlaydi
+    const seed = Math.floor(Math.random() * 999999);
+    const prompt = `professional footwear design, ${gender} ${type}, color ${color.replace('#', '')}, studio lighting, white background, high resolution`;
     const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=512&nologo=true&seed=${seed}`;
 
-    try {
-        // MUHIM: Rasmni fetch orqali tekshirib olamiz
-        const response = await fetch(imageUrl);
-        if (!response.ok) throw new Error("Tarmoq xatosi");
+    // 4. Rasmni to'g'ridan-to'g'ri yuklash
+    shoeImage.src = imageUrl;
 
-        const blob = await response.blob();
-        const objectURL = URL.createObjectURL(blob);
-
-        shoeImage.src = objectURL;
+    // Rasm muvaffaqiyatli yuklanganda
+    shoeImage.onload = function() {
         shoeImage.style.display = "block";
-        statusText.innerText = "✅ Tayyor!";
+        statusText.innerText = "✅ Dizayn tayyor!";
         
-        // Download tugmasi bo'lsa uni ham yangilaymiz
+        // Yuklab olish tugmasini sozlash (agar u index.html da bo'lsa)
         const downloadBtn = document.getElementById("downloadBtn");
-        if(downloadBtn) {
+        if (downloadBtn) {
             downloadBtn.style.display = "block";
-            downloadBtn.onclick = () => {
-                const a = document.createElement('a');
-                a.href = objectURL;
-                a.download = "design.jpg";
-                a.click();
-            };
+            downloadBtn.onclick = () => window.open(imageUrl, '_blank');
         }
+    };
 
-    } catch (error) {
-        console.error("Xatolik:", error);
-        statusText.innerText = "❌ Xatolik yuz berdi. Internetni tekshiring.";
-    }
+    // Rasm yuklanishda xato bersa
+    shoeImage.onerror = function() {
+        statusText.innerText = "❌ Rasm yuklashda xatolik. Qayta urinib ko'ring.";
+    };
 }
+
